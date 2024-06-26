@@ -1,8 +1,10 @@
+/* eslint-disable react/prop-types */
 import "./Cart.css";
 import products from "../../productData";
 import CartItem from "./CartItem";
+import Offcanvas from "../UI/Offcanvas";
 
-const Cart = () => {
+const Cart = (props) => {
   const cartItems = (
     <ul className="cart-items">
       {products.map((product) => (
@@ -12,25 +14,23 @@ const Cart = () => {
   );
 
   return (
-    <div className="offcanvas">
-      <div className="content">
-        <div className="cart-head">
-          <h2>Sepetim</h2>
-          <a href="/" className="cart-close">
-            X
-          </a>
-        </div>
-        {cartItems}
-        <div className="total">
-          <span>Toplam Değer</span>
-          <span>10 ₺</span>
-        </div>
-        <div className="actions">
-          <button className="cart-order">Sipariş Ver</button>
-          <button className="cart-clear">Temizle</button>
-        </div>
+    <Offcanvas onClose={props.onClose}>
+      <div className="cart-head">
+        <h2>Sepetim</h2>
+        <a href="/" className="cart-close" onClick={props.onClose}>
+          X
+        </a>
       </div>
-    </div>
+      {cartItems}
+      <div className="total">
+        <span>Toplam Değer</span>
+        <span>10 ₺</span>
+      </div>
+      <div className="actions">
+        <button className="cart-order">Sipariş Ver</button>
+        <button className="cart-clear">Temizle</button>
+      </div>
+    </Offcanvas>
   );
 };
 
